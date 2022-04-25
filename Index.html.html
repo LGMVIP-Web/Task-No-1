@@ -1,0 +1,194 @@
+<html>
+    <title>
+        To Do List
+    </title>
+
+    <head>
+        <style>
+            body {
+                    background-image: url('bg.jpg');
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-size: cover;
+                    
+                    }
+            *
+            {
+                box-sizing: border-box;
+                
+                width:500px;
+                
+                
+            }
+            .todolist{
+                padding-left: 380px;
+                padding-top: 100px;
+                
+            }
+
+
+            ul{
+                padding:0;
+                margin:0;
+               
+            }
+            ul li{
+                cursor: pointer;
+                padding:15px 11px 15px 44px;
+                position: relative;
+                background-color:whitesmoke;
+                transition: 0.3s;
+                font-size: 16px;
+                width:500px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                 user-select: none;
+
+            }
+            ul li:nth-child(odd) {
+                 background: aquamarine;
+}
+                ul li:hover {
+                    background: blanchedalmond;
+                    width:500px;
+}
+                ul li.checked {
+                    background: gray;
+                    color: black;
+                    text-decoration: line-through;
+}
+                ul li.checked::before {
+                    content: '';
+                    position: absolute;
+                    border-color:blue;
+                    border-style: solid;
+                    border-width: 0 4px 4px 0;
+                    top: 12px;
+                    left: 19px;
+                    transform: rotate(45deg);
+                    height: 18px;
+                    width: 9px;
+                    }
+                    .close{
+                        right: 0;
+                        left: 0;
+                        position:fixed;
+                        padding:18px 18px 18px 420px;
+                        width:10px;
+
+                    }
+                    
+                    
+                    .Header {
+                        background-color:rgb(100, 100, 100);
+                        padding: 30px 40px;
+                        color: black;
+                        
+}
+                    input{
+                        margin: 0px;
+                        border: 3px;
+                        border-radius: 3px;
+                        float:left;
+                        padding: 4px;
+                        width:60%;
+                        font-size: 18px;
+                        text-align: center;
+                    }
+                    
+                    .addBtn {
+                            padding: 5px;
+                            width: 15%;
+                            background: palegreen;
+                            color: black;
+                            float: left;
+                            text-align: center;
+                            font-size: 16px;
+                            cursor: pointer;
+                            transition: 0.3s;
+                            border-radius: 0;
+}
+
+                        .addBtn:hover {
+                        background-color: #bbb;
+                        }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="todolist">
+        <div id="List" class="Header">
+            <H1> My To Do List </H1>
+            <input type="text" id="Input" placeholder="Work....">
+            <span onclick="newElement()" class="addBtn">Add</span>
+
+        </div>
+
+        <ul id="MyList">
+            <li class="Checked">Go To University</li>
+            <li class="Checked"> Meet Friends</li>
+            <li>Group Study</li>
+            <li>Sleep</li>
+            <li>Office Work</li>
+        </ul>
+
+        <script>
+            var nodeList = document.getElementsByTagName("LI");
+            var i;
+            for (i = 0; i < nodeList.length; i++) {
+              var span = document.createElement("SPAN");
+              var txt = document.createTextNode("\u00D7");
+              span.className = "close";
+              span.appendChild(txt);
+              nodeList[i].appendChild(span);
+            }
+            
+            var close = document.getElementsByClassName("close");
+            var i;
+            for (i = 0; i < close.length; i++) {
+              close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+              }
+            }
+            
+            var list = document.querySelector('ul');
+            list.addEventListener('click', function(ev) {
+              if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+              }
+            }, false);
+            
+            function newElement() {
+              var li = document.createElement("li");
+              var inputValue = document.getElementById("Input").value;
+              var t = document.createTextNode(inputValue);
+              li.appendChild(t);
+              if (inputValue === '') {
+                alert("Please write Something");
+              } else {
+                document.getElementById("MyList").appendChild(li);
+              }
+              document.getElementById("Input").value = "";
+            
+              var span = document.createElement("SPAN");
+              var txt = document.createTextNode("\u00D7");
+              span.className = "close";
+              span.appendChild(txt);
+              li.appendChild(span);
+            
+              for (i = 0; i < close.length; i++) {
+                close[i].onclick = function() {
+                  var div = this.parentElement;
+                  div.style.display = "none";
+                }
+              }
+            }
+            </script>
+
+        </div>
+            
+    </body>
+</html>
